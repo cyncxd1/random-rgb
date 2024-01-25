@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<head>
+    <title></title>
+</head>
+<body>
+<div class = 'container' id = 'container'>Click here for something</div>
+<script defer>
+    const onEvent = (element, e, callback) => {
+        element.addEventListener(e, callback)
+    }
+
+    const container = document.getElementById('container')
+    let index = 0
+
+    container.style.visibility = 'visible'
+    onEvent(container, 'click', function() {            
+        const colors = Math.floor(Math.random() * 255)
+        const colors2 = Math.floor(Math.random() * 255)
+        const colors3 = Math.floor(Math.random() * 255)
+        const opac = Math.random() * 1;
+        const opacR = Math.floor(opac * 100) / 100
+        const rgb = 'rgba(' + colors + ', ' + colors2 + ', ' + colors3 + ')'
+        const rgba = 'rgba(' + colors + ', ' + colors2 + ', ' + colors3 + ', ' + opacR + ')'
+        const text = 'Color: ' + rgba + '\nYou have clicked ' + index + ' times.'
+        const brightness = 127.5
+        const vis = 0.5
+
+        container.style.backgroundColor = rgba
+        textBrightness()
+
+        function textBrightness() {
+            if (colors < brightness || colors2 < brightness || colors3 < brightness) {
+                return container.style.color = 'rgba(200, 200, 200)'
+            }
+            /*
+            if (colors2 < brightness) {
+                return container.style.color = 'rgba(200, 200, 200)'
+            }
+            if (colors3 < brightness) {
+                return container.style.color = 'rgba(200, 200, 200)'
+            }*/
+            if (opacR < vis) {
+                return container.style.color = 'rgba(200, 200, 200)'
+            }
+            container.style.color = 'rgba(45, 45, 45)'
+        }
+
+        console.log(text)
+        container.innerText = text
+
+        index++
+})
+</script>
+
+<style>
+    body {
+        /* background-image: url('rgb.jpg'); */
+        background-color: rgba(45, 45, 45);
+        
+    }
+
+    .container {
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 20px;
+        text-align: center;
+        font-family: Arial, monospace;
+        color: rgba(255, 255, 255, 1);
+        user-select: none;
+        cursor: pointer;
+        position: absolute;
+        padding: 50px;
+        background: rgba(45, 45, 45);
+        transition: 0.05s;
+    }
+
+    .container:active {
+        padding: 47px;
+    }
+</style>
+</body>
