@@ -3,13 +3,15 @@
     <head>
         <title>Random RGB</title>
     </head>
-    <body>
-        <div class = 'container' id = 'container'>Color: rgba(0, 0, 0, 0)<br>You have clicked 0 times.</div>
+    <body id = 'body'>
+        <div class = 'container' id = 'container'>COLOR: rgba(0, 0, 0, 0)<br><br>CLICKS: 0<br><br>HEX: #000000</div>
         <script defer>
             // this was just me testing how code.org's 'onEvent' works
             const onEvent = (element, e, callback) => {
                 document.getElementById(element).addEventListener(e, callback)
             }
+            // Default     
+            document.getElementById('container').style.backgroundColor = 'rgba(0, 0, 0, 0)'
 
             // for the counter
             let index = 0
@@ -18,6 +20,9 @@
             let colors
             let colors2
             let colors3
+            /*let hex1
+            let hex2
+            let hex3*/
 
             let opac
             let opacR
@@ -35,6 +40,11 @@
                 colors = Math.floor(Math.random() * 255)
                 colors2 = Math.floor(Math.random() * 255)
                 colors3 = Math.floor(Math.random() * 255)
+                // set colors to base 16 for hex
+                /*hex1 = colors.toString(16)
+                hex2 = colors2.toString(16)
+                hex3 = colors3.toString(16)
+                hexCol = hex1 + hex2 + hex3*/
 
                 // for calculating random opacity values
                 opac = Math.random() * 1;
@@ -43,8 +53,10 @@
                 // this is what is returned
                 rgb = 'rgba(' + colors + ', ' + colors2 + ', ' + colors3 + ')'
                 rgba = 'rgba(' + colors + ', ' + colors2 + ', ' + colors3 + ', ' + opacR + ')'
-                text = 'Color: ' + rgba + '\nYou have clicked ' + index + ' times.'
-
+                // check();
+                // console.log(hex1 + '\n' + hex2 + '\n' + hex3);
+                text = 'COLOR: ' + rgba + '\n\nCLICKS: ' + index + '\n\nHEX: ' + rgbToHex(colors, colors2, colors3)
+                
                 // brightness and visibility values for setting text color
                 brightness = 127.5
                 vis = 0.5
@@ -54,20 +66,25 @@
 
                 // check if color is less than brightness or opacity is less than vis
                 function textBrightness() {
-                    if (colors < brightness || colors2 < brightness || colors3 < brightness || opacR < vis) {
-                        return container.style.color = 'rgba(200, 200, 200)'
-                    }   
-                    /*
-                    if (colors2 < brightness) {
-                        return container.style.color = 'rgba(200, 200, 200)'
-                    }
-                    if (colors3 < brightness) {
-                        return container.style.color = 'rgba(200, 200, 200)'
-                    }
-                    if (opacR < vis) {
-                        return container.style.color = 'rgba(200, 200, 200)'
-                    }*/
-                    container.style.color = 'rgba(45, 45, 45)'
+                    if (colors < brightness || colors2 < brightness || colors3 < brightness || opacR < vis) return container.style.color = 'rgba(200, 200, 200)'
+                    document.getElementById('container').style.color = 'rgba(45, 45, 45)'
+                }
+
+                /*function check() {
+                    if (colors < 16) return hex1 = colors.toString(16).padStart(2, '0')
+                    if (colors2 < 16) return hex2 = colors2.toString(16).padStart(2, '0')
+                    if (colors3 < 16) return hex3 = colors3.toString(16).padStart(2, '0')
+                    if (opacHex < 10) return opacHex = opacHex.toString(10).padStart(2, '0')
+                }*/
+
+                // thank you stack overflow
+                function componentToHex(c) {
+                    let hex = c.toString(16);
+                    return hex.length == 1 ? '0' + hex : hex;
+                }
+
+                function rgbToHex(r, g, b) {
+                    return '#' + componentToHex(r) + componentToHex(g) + componentToHex(b);
                 }
 
                 // output
@@ -98,11 +115,11 @@
                 position: absolute;
                 padding: 50px;
                 background: rgba(45, 45, 45);
-                transition: 0.05s;
+                transition: 0.02s;
             }
 
             .container:active {
-                padding: 47px;
+                padding: 45px;
             }
         </style>
     </body>
