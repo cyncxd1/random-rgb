@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+    <!--CREATED BY CYNCXD(ME)-->
 <html>
     <head>
         <title>Random RGB</title>
@@ -10,8 +11,9 @@
             const onEvent = (element, e, callback) => {
                 document.getElementById(element).addEventListener(e, callback)
             }
+            const container = document.getElementById('container')
             // Default     
-            document.getElementById('container').style.backgroundColor = 'rgba(0, 0, 0, 0)'
+            container.style.backgroundColor = 'rgba(0, 0, 0, 0)'
 
             // for the counter
             let index = 0
@@ -20,9 +22,6 @@
             let colors
             let colors2
             let colors3
-            /*let hex1
-            let hex2
-            let hex3*/
 
             let opac
             let opacR
@@ -40,21 +39,16 @@
                 colors = Math.floor(Math.random() * 255)
                 colors2 = Math.floor(Math.random() * 255)
                 colors3 = Math.floor(Math.random() * 255)
-                // set colors to base 16 for hex
-                /*hex1 = colors.toString(16)
-                hex2 = colors2.toString(16)
-                hex3 = colors3.toString(16)
-                hexCol = hex1 + hex2 + hex3*/
 
                 // for calculating random opacity values
                 opac = Math.random() * 1;
                 opacR = Math.floor(opac * 100) / 100
 
-                // this is what is returned
+                // this is where i set the rgba values
                 rgb = 'rgba(' + colors + ', ' + colors2 + ', ' + colors3 + ')'
                 rgba = 'rgba(' + colors + ', ' + colors2 + ', ' + colors3 + ', ' + opacR + ')'
-                // check();
-                // console.log(hex1 + '\n' + hex2 + '\n' + hex3);
+
+                // set text
                 text = 'COLOR: ' + rgba + '\n\nCLICKS: ' + index + '\n\nHEX: ' + rgbToHex(colors, colors2, colors3)
                 
                 // brightness and visibility values for setting text color
@@ -67,15 +61,8 @@
                 // check if color is less than brightness or opacity is less than vis
                 function textBrightness() {
                     if (colors < brightness || colors2 < brightness || colors3 < brightness || opacR < vis) return container.style.color = 'rgba(200, 200, 200)'
-                    document.getElementById('container').style.color = 'rgba(45, 45, 45)'
+                    container.style.color = 'rgba(45, 45, 45)'
                 }
-
-                /*function check() {
-                    if (colors < 16) return hex1 = colors.toString(16).padStart(2, '0')
-                    if (colors2 < 16) return hex2 = colors2.toString(16).padStart(2, '0')
-                    if (colors3 < 16) return hex3 = colors3.toString(16).padStart(2, '0')
-                    if (opacHex < 10) return opacHex = opacHex.toString(10).padStart(2, '0')
-                }*/
 
                 // thank you stack overflow
                 function componentToHex(c) {
@@ -104,8 +91,8 @@
 
             .container {
                 left: 50%;
-               top: 50%;
-               transform: translate(-50%, -50%);
+                top: 50%;
+                transform: translate(-50%, -50%);
                 border-radius: 20px;
                 text-align: center;
                 font-family: Arial, monospace;
@@ -115,11 +102,26 @@
                 position: absolute;
                 padding: 50px;
                 background: rgba(45, 45, 45);
-                transition: 0.02s;
+                transition: 0.5s;
             }
 
             .container:active {
-                padding: 45px;
+                animation: shrink 0.1s;
+            }
+
+            .container:focus-within {
+                padding: 40px;
+            }
+
+            @keyframes shrink {
+                0% {
+                    transition: 0s;
+                    padding: 40px;
+                }
+                100% {
+                    transition: 0s;
+                    padding: 50px;
+                }
             }
         </style>
     </body>
