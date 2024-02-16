@@ -8,9 +8,8 @@
         <div class = 'container' id = 'container'>COLOR: rgba(0, 0, 0, 0)<br><br>CLICKS: 0<br><br>HEX: #000000</div>
         <script defer>
             // this was just me testing how code.org's 'onEvent' works
-            const onEvent = (element, e, callback) => {
-                document.getElementById(element).addEventListener(e, callback)
-            }
+            const onEvent = (element, e, callback) => return document.getElementById(element).addEventListener(e, callback)
+            
             const container = document.getElementById('container')
             // Default     
             container.style.backgroundColor = 'rgba(0, 0, 0, 0)'
@@ -48,11 +47,11 @@
                 opacR = Math.floor(opac * 100) / 100
 
                 // this is where i set the rgba values
-                rgb = 'rgba(' + colors + ', ' + colors2 + ', ' + colors3 + ')'
-                rgba = 'rgba(' + colors + ', ' + colors2 + ', ' + colors3 + ', ' + opacR + ')'
+                rgb = `rgba(${colors}, ${colors2}, ${colors3})`
+                rgba = `rgba(${colors}, ${colors2}, ${colors3}, ${opacR})`
 
                 // set text
-                text = 'COLOR: ' + rgba + '\n\nCLICKS: ' + index + '\n\nHEX: ' + rgbToHex(colors, colors2, colors3)
+                text = `COLOR: ${rgba}\n\nCLICKS: ${index}\n\nHEX: ${rgbToHex(colors, colors2, colors3)}`
                 
                 // brightness and visibility values for setting text color
                 brightness = 127.5
@@ -70,11 +69,11 @@
                 // thank you stack overflow
                 function componentToHex(c) {
                     let hex = c.toString(16);
-                    return hex.length == 1 ? '0' + hex : hex;
+                    return hex.length == 1 ? `0${hex}` : hex;
                 }
 
                 function rgbToHex(r, g, b) {
-                    return '#' + componentToHex(r) + componentToHex(g) + componentToHex(b);
+                    return `#${componentToHex(r)}${componentToHex(g)}${componentToHex(b)}`
                 }
 
                 // output
